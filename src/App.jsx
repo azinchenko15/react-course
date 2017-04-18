@@ -7,7 +7,7 @@ import Todo from './components/Todo';
 function App(props) {
   return (
     <main>
-      <Header title={props.title} />
+      <Header title={props.title} todos={props.todos}/>
       <section className="todo-list">
         <Todo title={ "Learn JS" } completed={true} />
         <Todo title={ "Learn React" } completed={false} />
