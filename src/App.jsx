@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-
 import Header from './components/Header';
 import Todo from './components/Todo';
 import todos from './components/todos';
@@ -8,7 +7,6 @@ import todos from './components/todos';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       todos: this.props.initialData
     }
@@ -17,7 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <Header title={this.props.title} />
+        <Header title={this.props.title} todos={this.state.todos}/>
         <section className="todo-list">
           {this.state.todos.map(todo =>
             <Todo key={todo.id} title={todo.title} completed={todo.completed} />

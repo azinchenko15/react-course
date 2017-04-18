@@ -5,7 +5,7 @@ function Stats(props) {
   let completed = props.todos.filter(todo => todo.completed).length;
   let notCompleted = all - completed;
 
-  return(
+  return (
     <table className="stats">
       <tr>
         <th>Всего:</th>
