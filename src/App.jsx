@@ -12,6 +12,7 @@ class App extends React.Component {
       todos: this.props.initialData
     }
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
     this.nextId = this.nextId.bind(this);
   }
 
@@ -27,8 +28,18 @@ class App extends React.Component {
       completed: false
     };
 
-    let todos = [...this.state.todos,  todo];
+    let todos = [...this.state.todos, todo];
 
+    this.setState({ todos });
+  }
+
+  handleEdit(id, title) {
+    let todos = this.state.todos.map(todo => {
+      if (todo.id === id) {
+        todo.title = title;
+      }
+      return todo;
+    });
     this.setState({ todos });
   }
 
@@ -38,7 +49,13 @@ class App extends React.Component {
         <Header title={this.props.title} todos={this.state.todos}/>
         <section className="todo-list">
           {this.state.todos.map(todo =>
-            <Todo key={todo.id} title={todo.title} completed={todo.completed} />
+            <Todo
+              key={todo.id}
+              id={todo.id}
+              title={todo.title}
+              completed={todo.completed}
+              onEdit={this.handleEdit}
+            />
           )}
         </section>
         <Form onAdd={this.handleAdd} />
