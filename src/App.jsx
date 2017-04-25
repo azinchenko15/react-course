@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Todo from './components/Todo';
 import todos from './components/todos';
+import Form from './components/Form';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,25 @@ class App extends React.Component {
     this.state = {
       todos: this.props.initialData
     }
+    this.handleAdd = this.handleAdd.bind(this);
+    this.nextId = this.nextId.bind(this);
+  }
+
+  nextId() {
+    this._nextId = this._nextId || 4;
+    return this._nextId++;
+  }
+
+  handleAdd(title) {
+    let todo = {
+      id: this.nextId(),
+      title, //title: title
+      completed: false
+    };
+
+    let todos = [...this.state.todos,  todo];
+
+    this.setState({ todos });
   }
 
   render() {
@@ -21,6 +41,7 @@ class App extends React.Component {
             <Todo key={todo.id} title={todo.title} completed={todo.completed} />
           )}
         </section>
+        <Form onAdd={this.handleAdd} />
       </main>
     );
   }
